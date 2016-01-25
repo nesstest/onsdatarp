@@ -8,6 +8,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name = "religion")
 @NamedQueries({
 		@NamedQuery(name = "Religion.findAll", query = "SELECT r FROM Religion r"),
 		@NamedQuery(name = "Religion.find", query = "SELECT r FROM Religion r WHERE r.geographic_ID IN (:ids)") })
