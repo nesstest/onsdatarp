@@ -180,6 +180,23 @@
                         <flush-strategy>IdleConnections</flush-strategy>
                     </pool>
                 </datasource>
+				<datasource jndi-name="java:/NessDataRpPU" enabled="${mysql.enabled}" use-java-context="true" pool-name="NessDataRpPool" use-ccm="true">
+                    <connection-url>jdbc:mysql://${env.OPENSHIFT_MYSQL_DB_HOST}:${env.OPENSHIFT_MYSQL_DB_PORT}/onslocalosd</connection-url>
+                    <driver>mysql</driver>
+                    <security>
+                      <user-name>${env.OPENSHIFT_MYSQL_DB_ONSDATARP_USERNAME}</user-name>
+                      <password>${env.OPENSHIFT_MYSQL_DB_ONSDATARP_PASSWORD}</password>
+                    </security>
+                    <validation>
+                        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+                        <background-validation>true</background-validation>
+                        <background-validation-millis>60000</background-validation-millis>
+                        <!--<validate-on-match>true</validate-on-match>-->
+                    </validation>
+                    <pool>
+                        <flush-strategy>IdleConnections</flush-strategy>
+                    </pool>
+                </datasource>
                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
