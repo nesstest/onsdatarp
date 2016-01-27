@@ -2,6 +2,8 @@ The OpenShift `jbossas` cartridge documentation can be found at:
 
 https://github.com/openshift/origin-server/tree/master/cartridges/openshift-origin-cartridge-jbossas/README.md
 
+Data Table Request
+
 http://onsdatarp-glassfishtest.rhcloud.com/datarp-web/rs/nessdatarp/getdatatable
 
 Example input (1 or many areas):
