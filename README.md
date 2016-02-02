@@ -29,3 +29,61 @@ or
 Notes:
 
 1) Single area. 2) Tables - religion or population. 3) columns array - must match db.
+
+Example JavaScript function:
+
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+function getOutput(url, input, pos)
+{
+       $.ajax({  
+           url:url,  
+           type:'post',
+           data :  input,  
+           contentType: 'application/json',    
+           success: function(response) { 
+                    $("<p>" + JSON.stringify(response) + "</p>").appendTo(pos)
+               } 
+       });  
+}
+
+getOutput('http://onsdatarp-glassfishtest.rhcloud.com/datarp-web/rs/nessdatarp/getdatatable',
+		'{ "table":"religion", "areas":["E00100093","E05003422"] }', '#dtrr');
+getOutput('http://onsdatarp-glassfishtest.rhcloud.com/datarp-web/rs/nessdatarp/getdatatable',
+		'{ "table":"population", "areas":["E00100093","E05003422"] }', '#dtrp');
+getOutput('http://onsdatarp-glassfishtest.rhcloud.com/datarp-web/rs/nessdatarp/getuserdefinedtable',
+		'{ "table":"population", "areaCode":"E00100093", "dataItems": [ { "userDefinedCol":"males0-4", "columns":["0_Male","1_Male","2_Male","3_Male","4_Male"] }, { "userDefinedCol":"females0-4", "columns":["0_Female","1_Female","2_Female","3_Female","4_Female"] } ] }', '#udtrp');
+getOutput('http://onsdatarp-glassfishtest.rhcloud.com/datarp-web/rs/nessdatarp/getuserdefinedtable',
+		'{ "table":"religion", "areaCode":"E00100093", "dataItems": [ { "userDefinedCol":"males0-34-christian", "columns":["Males_Age_0_to_15_Christian","Males_Age_16_to_24_Christian","Males_Age_25_to_34_Christian"] }, { "userDefinedCol":"females0-34-christian", "columns":["Females_Age_0_to_15_Christian","Females_Age_16_to_24_Christian","Females_Age_25_to_34_Christian"] } ] }', '#udtrr');
+
+</script>
+</head>
+<body>
+	<div id="test">
+		<p>
+		<h3>Data Table Request</h3>
+		</p>
+		<h4>Religion</h4>
+		<p>Response:</p>
+		<div id="dtrr"></div>
+		<h4>Population</h4>
+		<p>Response:</p>
+		<div id="dtrp"></div>
+		<p>
+		<h3>User Defined Table Request</h3>
+		</p>
+		<h4>Religion</h4>
+		<p>Response:</p>
+		<div id="udtrr"></div>
+		<h4>Population</h4>
+		<p>Response:</p>
+		<div id="udtrp"></div>
+	</div>
+</body>
+</html>
