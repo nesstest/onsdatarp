@@ -81,14 +81,14 @@ public abstract class AbstractFacade<T>
 
 	public JsonObject find(UserDefinedTableRequest udtr)
 	{
-		Map<String, BigInteger> results = new HashMap<String, BigInteger>();
+		Map<String, Integer> results = new HashMap<String, Integer>();
 
 		for (DataItem di : udtr.getDataItems())
 		{
-			BigInteger result = (BigInteger) getEntityManager()
+			Integer result = ((Number) getEntityManager()
 				.createNativeQuery(
 						createQuery(udtr.getTable(), udtr.getAreaCode(), di))
-				.getSingleResult();
+				.getSingleResult()).intValue();
 
 			results.put(di.getUserDefinedCol(), result);
 		}
@@ -116,7 +116,7 @@ public abstract class AbstractFacade<T>
 		return sb.toString();
 	}
 
-	public JsonObject buildOutput(Map<String, BigInteger> input,
+	public JsonObject buildOutput(Map<String, Integer> input,
 			String areaCode)
 	{		
 		JsonObjectBuilder objBuilder = Json.createObjectBuilder();
