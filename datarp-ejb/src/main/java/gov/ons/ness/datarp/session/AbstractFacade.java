@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.EntityManager;
 
 import gov.ons.ness.datarp.data.DataItem;
@@ -117,16 +118,16 @@ public abstract class AbstractFacade<T>
 
 	public JsonObject buildOutput(Map<String, BigInteger> input,
 			String areaCode)
-	{
-		JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
+	{		
+		JsonObjectBuilder objBuilder = Json.createObjectBuilder();
 
 		for (String s : input.keySet())
-		{
-			arrBuilder.add(Json.createObjectBuilder().add(s, input.get(s)));
+		{			
+			objBuilder.add(s, input.get(s));
 		}
-
+		
 		JsonObject output = Json.createObjectBuilder().add("areaCode", areaCode)
-			.add("results", arrBuilder.build()).build();
+				.add("results", objBuilder.build()).build();
 
 		return output;
 	}
